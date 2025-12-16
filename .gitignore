@@ -1,0 +1,65 @@
+# ==========================
+# Python
+# ==========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pyd
+*.pyo
+*.pyt
+*.pys
+*.pyz
+*.log
+
+# ==========================
+# Virtual Environments
+# ==========================
+env/
+venv/
+.venv/
+ENV/
+.env
+.env.*
+
+# ==========================
+# Distribution / packaging
+# ==========================
+*.egg
+*.egg-info/
+dist/
+build/
+*.wheel
+
+# ==========================
+# Django
+# ==========================
+*.sqlite3
+db.sqlite3
+staticfiles/
+media/
+*.log
+local_settings.py
+
+# ==========================
+# Docker
+# ==========================
+*.env
+docker-compose.override.yml
+.dockerignore
+
+# ==========================
+# IDEs / Editors
+# ==========================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ==========================
+# Mac / Linux
+# ==========================
+.DS_Store
+*.swp
+*~
