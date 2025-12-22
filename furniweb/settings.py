@@ -26,6 +26,7 @@ SECRET_KEY = "django-insecure-u&xt(6=l-=cb$*bat#j%(ks3p!$-#y#e5bh_f^n-u(fy#vd32q
 DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
+AUTH_USER_MODEL = "authentication.User"
 
 
 # Application definition
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "authentication",
 ]
 
 MIDDLEWARE = [
