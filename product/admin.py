@@ -12,14 +12,14 @@ from .models import (
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug")  # removed parent_category
+    list_display = ("name", "slug")  
     search_fields = ("name",)
-    prepopulated_fields = {"slug": ("name",)}  # auto fill slug
+    prepopulated_fields = {"slug": ("name",)} 
 
 
 @admin.register(Vendor)
 class VendorAdmin(admin.ModelAdmin):
-    list_display = ("name",)  # removed email, phone, website
+    list_display = ("name",)  
     search_fields = ("name",)
 
 
