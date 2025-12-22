@@ -5,3 +5,5 @@ sqlparse==0.5.4
 tzdata==2025.3
 psycopg[binary]
 Pillow
+djangorestframework
+djangorestframework-simplejwt
