@@ -1,9 +1,13 @@
 from django.contrib import admin
-from .models import Order, OrderItem
+from .models import Order
+from cart.models import Item
+
 
 class OrderItemInline(admin.TabularInline):
-    model = OrderItem
+    model = Item
+    fk_name = "order"
     extra = 0
+
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
@@ -11,8 +15,3 @@ class OrderAdmin(admin.ModelAdmin):
     list_filter = ("status",)
     search_fields = ("user__email",)
     inlines = [OrderItemInline]
-
-@admin.register(OrderItem)
-class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ("order", "product", "variant", "quantity", "price")
-    search_fields = ("product__title", "variant__title")

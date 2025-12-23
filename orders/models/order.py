@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from authentication.models import Address
 
+
 class Order(models.Model):
     STATUS_CHOICES = (
         ("pending", "Pending"),
@@ -15,6 +16,7 @@ class Order(models.Model):
         on_delete=models.CASCADE,
         related_name="orders"
     )
+
     shipping_address = models.ForeignKey(
         Address,
         related_name="shipping_orders",
@@ -22,6 +24,7 @@ class Order(models.Model):
         null=True,
         blank=True
     )
+
     billing_address = models.ForeignKey(
         Address,
         related_name="billing_orders",
@@ -36,4 +39,4 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Order {self.id} by {self.user.email}"
+        return f"Order {self.id}"

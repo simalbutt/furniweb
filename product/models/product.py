@@ -26,8 +26,5 @@ class Product(models.Model):
 
     created_at = models.DateField()
 
-    buy_together = models.ManyToManyField("self", blank=True, symmetrical=False, related_name="bought_with")
-    related_products = models.ManyToManyField("self", blank=True, symmetrical=False, related_name="related_to")
-
     def __str__(self):
         return self.title
