@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import (
     Category,
-    Vendor,
     Product,
     ProductFeature,
     ProductVariant,
@@ -12,15 +11,10 @@ from .models import (
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ("name", "slug")  
+    list_display = ("name", "slug")
     search_fields = ("name",)
-    prepopulated_fields = {"slug": ("name",)} 
+    prepopulated_fields = {"slug": ("name",)}
 
-
-@admin.register(Vendor)
-class VendorAdmin(admin.ModelAdmin):
-    list_display = ("name",)  
-    search_fields = ("name",)
 
 
 class ProductImageInline(admin.TabularInline):
@@ -35,13 +29,16 @@ class ProductVariantInline(admin.TabularInline):
     model = ProductVariant
     extra = 1
 
+
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("title", "vendor", "min_price", "max_price", "available", "items_in_stock", "sold")
-    list_filter = ("available", "categories", "vendor")
-    search_fields = ("title", "description")
+    list_display = ("title", "vendername", "min_price", "max_price", "available", "items_in_stock", "sold")
+    list_filter = ("available", "categories")
+    search_fields = ("title", "description", "vendername")
     inlines = [ProductImageInline, ProductFeatureInline, ProductVariantInline]
     prepopulated_fields = {"slug": ("title",)}
+
 
 
 @admin.register(ProductVariant)
@@ -54,6 +51,8 @@ class ProductVariantAdmin(admin.ModelAdmin):
 @admin.register(ProductImage)
 class ProductImageAdmin(admin.ModelAdmin):
     list_display = ("product", "image")
+
+
 
 @admin.register(VariantImage)
 class VariantImageAdmin(admin.ModelAdmin):
