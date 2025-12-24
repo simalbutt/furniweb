@@ -1,5 +1,6 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
+
 from authentication.models import Address
 
 
@@ -12,9 +13,7 @@ class Order(models.Model):
     )
 
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="orders"
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="orders"
     )
 
     shipping_address = models.ForeignKey(
@@ -22,7 +21,7 @@ class Order(models.Model):
         related_name="shipping_orders",
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
     )
 
     billing_address = models.ForeignKey(
@@ -30,7 +29,7 @@ class Order(models.Model):
         related_name="billing_orders",
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
     )
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="pending")

@@ -20,9 +20,9 @@ RUN pip install -r requirements.txt
 COPY . .
 
 RUN pip install black ruff isort
-RUN black --check . || true
-RUN ruff check . || true
-RUN isort --check-only . || true
+RUN black --check . 
+RUN ruff check . 
+RUN isort --check-only . 
 
 
 # Default command: Django dev server

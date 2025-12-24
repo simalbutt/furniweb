@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from ..models import ProductImage, VariantImage
 from ..models.product import Product
 from ..models.variant import ProductVariant
@@ -13,8 +14,8 @@ class ProductImageSerializer(serializers.Serializer):
         return ProductImage.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.product = validated_data.get('product', instance.product)
-        instance.image = validated_data.get('image', instance.image)
+        instance.product = validated_data.get("product", instance.product)
+        instance.image = validated_data.get("image", instance.image)
         instance.save()
         return instance
 
@@ -28,9 +29,7 @@ class VariantImageSerializer(serializers.Serializer):
         return VariantImage.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.variant = validated_data.get('variant', instance.variant)
-        instance.image = validated_data.get('image', instance.image)
+        instance.variant = validated_data.get("variant", instance.variant)
+        instance.image = validated_data.get("image", instance.image)
         instance.save()
         return instance
-
-    
