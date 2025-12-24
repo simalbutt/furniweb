@@ -1,7 +1,8 @@
-from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
 
 from utils.response import APIResponse
+
 from ..models import Product
 from ..serializers.product import ProductSerializer
 
@@ -12,11 +13,12 @@ class ProductListCreateAPIView(APIView):
     """
 
     def get(self, request):
-        products = Product.objects.prefetch_related("variants", "images", "features").all()
+        products = Product.objects.prefetch_related(
+            "variants", "images", "features"
+        ).all()
         serializer = ProductSerializer(products, many=True)
         return APIResponse.success(
-            data=serializer.data,
-            message="Products fetched successfully"
+            data=serializer.data, message="Products fetched successfully"
         )
 
     def post(self, request):
@@ -26,12 +28,9 @@ class ProductListCreateAPIView(APIView):
             return APIResponse.success(
                 data=serializer.data,
                 message="Product created successfully",
-                status_code=201
+                status_code=201,
             )
-        return APIResponse.error(
-            message="Validation error",
-            errors=serializer.errors
-        )
+        return APIResponse.error(message="Validation error", errors=serializer.errors)
 
 
 class ProductDetailAPIView(APIView):
@@ -43,8 +42,7 @@ class ProductDetailAPIView(APIView):
         product = get_object_or_404(Product, slug=slug)
         serializer = ProductSerializer(product)
         return APIResponse.success(
-            data=serializer.data,
-            message=f"{slug} fetched successfully"
+            data=serializer.data, message=f"{slug} fetched successfully"
         )
 
     def put(self, request, slug):
@@ -53,17 +51,11 @@ class ProductDetailAPIView(APIView):
         if serializer.is_valid():
             serializer.save()
             return APIResponse.success(
-                data=serializer.data,
-                message="Product updated successfully"
+                data=serializer.data, message="Product updated successfully"
             )
-        return APIResponse.error(
-            message="Validation error",
-            errors=serializer.errors
-        )
+        return APIResponse.error(message="Validation error", errors=serializer.errors)
 
     def delete(self, request, slug):
         product = get_object_or_404(Product, slug=slug)
         product.delete()
-        return APIResponse.success(
-            message="Product deleted successfully"
-        )
+        return APIResponse.success(message="Product deleted successfully")

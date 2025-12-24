@@ -1,9 +1,11 @@
-from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework.views import APIView
+
+from utils.response import APIResponse
+
 from ..models import ProductFeature
 from ..serializers.feature import ProductFeatureSerializer
-from utils.response import APIResponse
 
 
 class ProductFeatureListCreateAPIView(APIView):
@@ -13,8 +15,7 @@ class ProductFeatureListCreateAPIView(APIView):
         features = ProductFeature.objects.all()
         serializer = ProductFeatureSerializer(features, many=True)
         return APIResponse.success(
-            data=serializer.data,
-            message="Product features fetched successfully"
+            data=serializer.data, message="Product features fetched successfully"
         )
 
     def post(self, request):
@@ -24,12 +25,9 @@ class ProductFeatureListCreateAPIView(APIView):
             return APIResponse.success(
                 data=serializer.data,
                 message="Product feature created successfully",
-                status_code=status.HTTP_201_CREATED
+                status_code=status.HTTP_201_CREATED,
             )
-        return APIResponse.error(
-            message="Validation error",
-            errors=serializer.errors
-        )
+        return APIResponse.error(message="Validation error", errors=serializer.errors)
 
 
 class ProductFeatureDetailAPIView(APIView):
@@ -46,13 +44,9 @@ class ProductFeatureDetailAPIView(APIView):
         if serializer.is_valid():
             serializer.save()
             return APIResponse.success(
-                data=serializer.data,
-                message="Product feature updated successfully"
+                data=serializer.data, message="Product feature updated successfully"
             )
-        return APIResponse.error(
-            message="Validation error",
-            errors=serializer.errors
-        )
+        return APIResponse.error(message="Validation error", errors=serializer.errors)
 
     def delete(self, request, pk):
         feature = get_object_or_404(ProductFeature, pk=pk)

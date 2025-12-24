@@ -1,5 +1,5 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
 
 
 class Cart(models.Model):
@@ -8,7 +8,7 @@ class Cart(models.Model):
         on_delete=models.CASCADE,
         related_name="carts",
         null=True,
-        blank=True
+        blank=True,
     )
     session_key = models.CharField(max_length=255, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
