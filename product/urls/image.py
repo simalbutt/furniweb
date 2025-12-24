@@ -1,6 +1,9 @@
 from django.urls import path
-from ..views.image import ProductImageListCreateAPIView, ProductImageDetailAPIView
+
+from ..views.image import (ProductImageDetailAPIView,
+                           ProductImageListCreateAPIView)
+
 urlpatterns = [
-    path('', ProductImageListCreateAPIView.as_view(), name='image-list-create'),
-    path('<int:pk>/', ProductImageDetailAPIView.as_view(), name='image-detail'),
+    path("", ProductImageListCreateAPIView.as_view(), name="image-list-create"),
+    path("<int:pk>/", ProductImageDetailAPIView.as_view(), name="image-detail"),
 ]

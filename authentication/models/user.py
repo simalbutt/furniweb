@@ -27,7 +27,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    username = None  
+    username = None
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15, blank=True)
 
@@ -38,4 +38,3 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
-

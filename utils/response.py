@@ -1,5 +1,5 @@
-from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.response import Response
 
 
 class APIResponse:
@@ -8,33 +8,19 @@ class APIResponse:
     """
 
     @staticmethod
-    def success(
-        data=None,
-        message="Success",
-        status_code=status.HTTP_200_OK
-    ):
+    def success(data=None, message="Success", status_code=status.HTTP_200_OK):
         return Response(
-            {
-                "success": True,
-                "message": message,
-                "data": data
-            },
-            status=status_code
+            {"success": True, "message": message, "data": data}, status=status_code
         )
 
     @staticmethod
     def error(
         message="Something went wrong",
         errors=None,
-        status_code=status.HTTP_400_BAD_REQUEST
+        status_code=status.HTTP_400_BAD_REQUEST,
     ):
         return Response(
-            {
-                "success": False,
-                "message": message,
-                "errors": errors
-            },
-            status=status_code
+            {"success": False, "message": message, "errors": errors}, status=status_code
         )
 
     @staticmethod
@@ -44,5 +30,5 @@ class APIResponse:
                 "success": False,
                 "message": message,
             },
-            status=status_code
+            status=status_code,
         )

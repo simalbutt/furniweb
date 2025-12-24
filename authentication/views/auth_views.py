@@ -1,11 +1,15 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from ..serializers.auth_serializers import UserRegisterSerializer, LogoutSerializer
+
 from ..models.user import User
+from ..serializers.auth_serializers import (LogoutSerializer,
+                                            UserRegisterSerializer)
+
 
 class UserRegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserRegisterSerializer
+
 
 class LogoutView(generics.GenericAPIView):
     serializer_class = LogoutSerializer
