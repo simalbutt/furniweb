@@ -1,5 +1,6 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
+
 
 class Address(models.Model):
     ADDRESS_TYPE_CHOICES = (
@@ -12,12 +13,12 @@ class Address(models.Model):
         on_delete=models.CASCADE,
         related_name="addresses",
         null=True,
-        blank=True
+        blank=True,
     )
     address_type = models.CharField(max_length=20, choices=ADDRESS_TYPE_CHOICES)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    address = models.CharField(max_length=255)  
+    address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=20)
     phone = models.CharField(max_length=20)

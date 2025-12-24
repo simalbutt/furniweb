@@ -1,10 +1,12 @@
-from rest_framework.views import APIView
-from rest_framework.parsers import MultiPartParser, FormParser
 from django.shortcuts import get_object_or_404
 from rest_framework import status
+from rest_framework.parsers import FormParser, MultiPartParser
+from rest_framework.views import APIView
+
+from utils.response import APIResponse
+
 from ..models import ProductImage
 from ..serializers.image import ProductImageSerializer
-from utils.response import APIResponse
 
 
 class ProductImageListCreateAPIView(APIView):
@@ -23,22 +25,24 @@ class ProductImageListCreateAPIView(APIView):
         serializer = ProductImageSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return APIResponse.success(data=serializer.data, status_code=status.HTTP_201_CREATED)
+            return APIResponse.success(
+                data=serializer.data, status_code=status.HTTP_201_CREATED
+            )
         return APIResponse.error(message="Validation error", errors=serializer.errors)
+
 
 class ProductImageDetailAPIView(APIView):
     """
     Retrieve, update, or delete a product image.
     """
 
-    parser_classes = [MultiPartParser, FormParser] 
+    parser_classes = [MultiPartParser, FormParser]
 
     def get(self, request, pk):
         image = get_object_or_404(ProductImage, pk=pk)
         serializer = ProductImageSerializer(image)
         return APIResponse.success(
-            data=serializer.data,
-            message="Product image fetched successfully"
+            data=serializer.data, message="Product image fetched successfully"
         )
 
     def put(self, request, pk):
@@ -47,17 +51,11 @@ class ProductImageDetailAPIView(APIView):
         if serializer.is_valid():
             serializer.save()
             return APIResponse.success(
-                data=serializer.data,
-                message="Product image updated successfully"
+                data=serializer.data, message="Product image updated successfully"
             )
-        return APIResponse.error(
-            message="Validation error",
-            errors=serializer.errors
-        )
+        return APIResponse.error(message="Validation error", errors=serializer.errors)
 
     def delete(self, request, pk):
         image = get_object_or_404(ProductImage, pk=pk)
         image.delete()
-        return APIResponse.success(
-            message="Product image deleted successfully"
-        )
+        return APIResponse.success(message="Product image deleted successfully")
