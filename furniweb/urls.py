@@ -25,5 +25,6 @@ urlpatterns = [
     path('product/', include('product.urls.products')),
     path('variant/', include('product.urls.variant')),
     path('image/', include('product.urls.image')),
+    path('variant_image/', include('product.urls.variant_image')),
     path('feature/', include('product.urls.feature')),
 ]
