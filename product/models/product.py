@@ -1,6 +1,5 @@
 from django.db import models
 from .catagory import Category
-from .vendor import Vendor
 
 class Product(models.Model):
     AVAILABILITY_CHOICES = (
@@ -13,7 +12,8 @@ class Product(models.Model):
     description = models.TextField()
     
     categories = models.ManyToManyField(Category, related_name="products")
-    vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True, blank=True)
+    vendername = models.CharField(max_length=200, unique=True, default="default_vendor")
+
 
     min_price = models.DecimalField(max_digits=10, decimal_places=2)
     max_price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -24,7 +24,7 @@ class Product(models.Model):
     sold = models.PositiveIntegerField(default=0)
     items_in_stock = models.PositiveIntegerField(default=0)
 
-    created_at = models.DateField()
+    created_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.title
