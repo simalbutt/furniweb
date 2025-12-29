@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>Order Confirmation</h2>
+    <p>Hello {{ user.first_name }},</p>
+    <p>Thank you for your order!</p>
+    <p><strong>Order ID:</strong> {{ order.id }}</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+    <p><strong>Total:</strong> Rs {{ order.total_amount }}</p>
+
+    <h3>Items</h3>
+    <ul>
+      {% for item in items %}
+        <li>{{ item.product.name }} ({{ item.quantity }}) — Rs {{ item.price }}</li>
+      {% endfor %}
+    </ul>
+
+    <p>We’ll notify you when your order is shipped.</p>
+    <p>Thanks,<br />Your Store Team</p>
+  </body>
+</html>
