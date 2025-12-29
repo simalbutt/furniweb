@@ -7,3 +7,5 @@ psycopg[binary]
 Pillow
 djangorestframework
 djangorestframework-simplejwt
+django-environ
+
