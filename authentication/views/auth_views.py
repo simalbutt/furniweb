@@ -2,8 +2,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 
 from ..models.user import User
-from ..serializers.auth import (LogoutSerializer,
-                                            UserRegisterSerializer)
+from ..serializers.auth import LogoutSerializer, UserRegisterSerializer
 
 
 class UserRegisterView(generics.CreateAPIView):

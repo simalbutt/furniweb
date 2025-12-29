@@ -1,8 +1,10 @@
-from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from authentication.serializers.address import AddressSerializer
+from rest_framework.views import APIView
+
 from authentication.models import Address
+from authentication.serializers.address import AddressSerializer
 from utils.response import APIResponse
+
 
 class AddressAPIView(APIView):
     permission_classes = [IsAuthenticated]
