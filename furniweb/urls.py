@@ -27,4 +27,9 @@ urlpatterns = [
     path("image/", include("product.urls.image")),
     path("variant_image/", include("product.urls.variant_image")),
     path("feature/", include("product.urls.feature")),
+    path("cart/", include("cart.urls.cart")),
+    path("order/", include("orders.urls.order")),
+    path("address/", include("authentication.urls.address")),
+    
+
 ]

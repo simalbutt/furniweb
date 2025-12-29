@@ -1,8 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
-
 from utils.response import APIResponse
-
 from ..models import Product
 from ..serializers.product import ProductSerializer
 
@@ -13,9 +11,17 @@ class ProductListCreateAPIView(APIView):
     """
 
     def get(self, request):
+        category_ids = request.query_params.getlist("categories", [])
+        # Keep only valid integers to avoid ValueError
+        category_ids = [int(c) for c in category_ids if c.isdigit()]
+
         products = Product.objects.prefetch_related(
-            "variants", "images", "features"
+            "variants", "images", "features", "categories"
         ).all()
+
+        if category_ids:
+            products = products.filter(categories__id__in=category_ids).distinct()
+
         serializer = ProductSerializer(products, many=True)
         return APIResponse.success(
             data=serializer.data, message="Products fetched successfully"
@@ -39,7 +45,12 @@ class ProductDetailAPIView(APIView):
     """
 
     def get(self, request, slug):
-        product = get_object_or_404(Product, slug=slug)
+        product = get_object_or_404(
+            Product.objects.prefetch_related(
+                "variants", "images", "features", "categories"
+            ),
+            slug=slug
+        )
         serializer = ProductSerializer(product)
         return APIResponse.success(
             data=serializer.data, message=f"{slug} fetched successfully"
