@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
+
 from utils.response import APIResponse
+
 from ..models import Product
 from ..serializers.product import ProductSerializer
 
@@ -49,7 +51,7 @@ class ProductDetailAPIView(APIView):
             Product.objects.prefetch_related(
                 "variants", "images", "features", "categories"
             ),
-            slug=slug
+            slug=slug,
         )
         serializer = ProductSerializer(product)
         return APIResponse.success(

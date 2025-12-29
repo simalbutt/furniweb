@@ -30,6 +30,4 @@ urlpatterns = [
     path("cart/", include("cart.urls.cart")),
     path("order/", include("orders.urls.order")),
     path("address/", include("authentication.urls.address")),
-    
-
 ]
