@@ -14,8 +14,6 @@ env/
 venv/
 .venv/
 ENV/
-.env
-.env.*
 
 *.egg
 *.egg-info/
@@ -35,9 +33,10 @@ local_settings.py
 docker-compose.override.yml
 .dockerignore
 
-.vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
 
 
+config.bat
+node_modules

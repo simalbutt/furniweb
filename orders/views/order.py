@@ -1,11 +1,11 @@
-from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated
 from django.db import transaction
-from utils.response import APIResponse
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
 
 from cart.services import get_user_cart
 from orders.models.order import Order
 from orders.serializers.order import OrderSerializer
+from utils.response import APIResponse
 
 
 class PlaceOrderAPIView(APIView):
@@ -16,14 +16,11 @@ class PlaceOrderAPIView(APIView):
         cart = get_user_cart(request.user)
         items = cart.items.select_for_update()
 
-
         if not items.exists():
             return APIResponse.error("Cart is empty")
-        
+
         if not request.data.get("shipping_address"):
             return APIResponse.error("Shipping address is required")
-        
-
 
         order = Order.objects.create(
             user=request.user,
